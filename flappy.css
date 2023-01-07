@@ -5,6 +5,7 @@
 @font-face {
     font-family: 'Pixel';
     src: url(Pixel.ttf);
+    color: #fff;
 }
 [wm-flappy]{
     position: relative;
@@ -56,3 +57,17 @@
     font-family: Pixel;
     font-size: 70px;
 }
+
+body {
+    margin: 0;
+    background-color: #0D262D;
+    color: #fff;
+    height: 100%;
+}
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+}
+
