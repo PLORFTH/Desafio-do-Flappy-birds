@@ -14,7 +14,7 @@ function Barreira(reversa = false){
     this.elemento.appendChild(reversa ? corpo : borda)
     this.elemento.appendChild(reversa ? borda : corpo)
 
-    this.setAltura = altura => corpo.style.heigth = `${altura}px`
+    this.setAltura = altura => corpo.style.height = `${altura}px`
 }
 
 const b = new Barreira(true)
