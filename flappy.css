@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: 'Pixel';
-    src: url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+    src: url(Pixel.ttf);
 }
 [wm-flappy]{
     position: relative;
