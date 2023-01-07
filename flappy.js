@@ -50,8 +50,8 @@ function ParDeBarreiras(altura, abertura, x) {
     this.setX(x)
 }
 
-const b = new ParDeBarreiras(700, 220, 400)
-document.querySelector('[wm-flappy]').appendChild(b.elemento)
+// const b = new ParDeBarreiras(700, 220, 400)
+// document.querySelector('[wm-flappy]').appendChild(b.elemento)
 
 //abaixo é para fazer a jogabilidade, no caso criar mais de um conjunto de barreiras com espaço entre elas
 //e fazer a contabilização dos pontos
@@ -63,7 +63,7 @@ function Barreiras(altura, largura, abertura, espaco, notificaPonto){
         new ParDeBarreiras(altura, abertura, largura + espaco * 2),
         new ParDeBarreiras(altura, abertura, largura + espaco * 3)
     ]
-    const deslocamento = 3;
+    const deslocamento = 2;
     this.animar = () => {
         this.pares.forEach(par => {
             par.setX(par.getX() - deslocamento)
@@ -79,12 +79,45 @@ function Barreiras(altura, largura, abertura, espaco, notificaPonto){
             if(cruzouOMeio) notificaPonto()
         })
     }
+
+    function Passaro(alturaJogo){
+        let voando = false
+
+        this.elemento = novoElemento('img', 'passaro')
+        this.elemento.src = 'passaro.png'
+
+        this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
+        this.setY = y => this.elemento.style.bottom = `${y}px`
+
+        window.onkeydown = e => voando = true
+        window.onkeyup = e => voando = false
+
+        this.animar = () => {
+            const novoY = this.getY() + (voando ? 8 : -5)
+            const alturaMaxima = alturaJogo - this.elemento.clientHeight
+
+            if(novoY <= 0){
+                this.setY(0)
+            }else if(novoY >= alturaMaxima){
+                this.setY(alturaMaxima)
+            }else{
+                this.setY(novoY)
+            }
+        }
+    }
+    this.setY(alturaJogo / 2)
+
+
 }
+
 
 const barreiras = new Barreiras(700, 1200, 200, 400)
 //    altura, largura, abertura, espaco
+const passaro = new Passaro(700)
 const areaDoJogo = document.querySelector('[wm-flappy]')
+areaDoJogo.appendChild(passaro.elemento)
 barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
 setInterval(()=> {
     barreiras.animar()
+    passaro.animar()
 }, 20)
