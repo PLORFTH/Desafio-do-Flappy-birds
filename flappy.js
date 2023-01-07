@@ -18,5 +18,5 @@ function Barreira(reversa = false){
 }
 
 const b = new Barreira(true)
-b.setAltura(200)
+b.setAltura(500)
 document.querySelector('[wm-flappy').appendChild(b.elemento)
